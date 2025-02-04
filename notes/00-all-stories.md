@@ -1,6 +1,13 @@
 # Stories
 
-1. View a list of items on a shopping list
+Key:
+ - ⏳️ Not started
+ - 🛠️ In progress
+ - 🖥️ Backend done
+ - 👩‍💻 Frontend done
+ - 🤔 Needs discussion (out of scope for demo)
+
+1. View a list of items on a shopping list 🛠️🖥️
 ```
     As a ... Shopper
     I want to ... View items on my shopping list
@@ -9,7 +16,7 @@
         Create a shopping list that can contain a list of groceries
 ```
 
-2. Add items to the shopping list
+2. Add items to the shopping list 🛠️🖥️
 ```
     As a ... Shopper
     I want to ... be able to add items to my shopping list
@@ -19,7 +26,7 @@
 ```
 
 
-3. Remove stuff from the shopping list
+3. Remove stuff from the shopping list ⏳
 ```
    As a ... shopper
    I want to ... be able to remove items from my shopping list
@@ -28,7 +35,7 @@
        Create a way for user to remove an item to the shopping list
 ```
 
-4. When I’ve bought something from my list I want to be able to cross it off the list
+4. When I’ve bought something from my list I want to be able to cross it off the list ⏳
 ```
    As a ... shopper
    I want to ... have a way of marking off when I’ve picked up an item
@@ -37,7 +44,7 @@
         Create a way for users to know what they have and haven’t already picked up
 ```
 
-5. Persist the data so I can view the list if I move away from the page
+5. Persist the data so I can view the list if I move away from the page 🛠️🖥️
 ```
    As a ... shopper
    I want to ... be able to still see the state of my shopping list when I come back to it
@@ -47,7 +54,7 @@
        Persist shopping list state between page visits
 ```
 
-6. I want to be able to reorder items on my list
+6. I want to be able to reorder items on my list ⏳
 ```
    As a ... shopper
    I want to ... be able to reorder items on my shopping list
@@ -57,7 +64,7 @@
        Create a way for user to be able to change the order of items in their shopping list
 ```
 
-7. Total up the prices
+7. Total up the prices 🤔
 ```
    As a ... shopper
    I want to ... see the total of how much the items on my list are going to cost
@@ -66,7 +73,7 @@
        Display the total cost for the whole shop
 ```
 
-8. Put a spending limit in place, alert me if I go over the limit
+8. Put a spending limit in place, alert me if I go over the limit 🤔
 ```
    As a ... shopper
    I want to ... see the total of how much the items on my list are going to cost
@@ -75,7 +82,7 @@
        Display the total cost for the whole shop
 ```
 
-9. I want to share my shopping list via email
+9. I want to share my shopping list via email ⏳
 ```
    As a ... shopper
    I want to ... I want to send my shopping list to my partner
@@ -84,7 +91,7 @@
        Add functionality to send the shopping list via email
 ```
 
-10. User and password protect
+10. User and password protect 🤔
 ```
     As a ... shopper
     I want to ... protect my shopping list from other people
