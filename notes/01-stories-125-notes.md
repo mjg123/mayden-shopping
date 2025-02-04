@@ -20,7 +20,7 @@ Overall flow:
 API needs:
 - POST `/api/list` (Empty body) -> {id: xxx}
 - GET `/api/list/:id` -> {id: xxx, items: [], listName: xxx}
-- POST `/api/list/:id` (Item in body) -> same response (Add to list)
+- POST `/api/list/:id/item` (Item in body) -> same response (Add to list)
 
 FE notes
  - minimal CSS
