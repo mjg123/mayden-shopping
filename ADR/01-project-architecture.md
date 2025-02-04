@@ -26,7 +26,7 @@ Because:
 
 ### Backend stack
   - Spring Boot (Java) app
-    - Components: Spring Web, Spring Security 
+    - Components: Spring Web, Spring Security, Spring data JPA
 
 Because:
   - Developer familiarity
