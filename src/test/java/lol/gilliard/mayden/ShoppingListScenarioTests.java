@@ -9,6 +9,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 
+import static lol.gilliard.mayden.TestHelpers.emptyShoppingListAssertions;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -32,20 +33,10 @@ public class ShoppingListScenarioTests {
 
     private ResponseEntity<ShoppingList> addItemToList(String id, ShoppingItem item) {
         String url = "http://localhost:" + port + "/api/list/" + id + "/item";
-        System.out.println(url);
         return this.restTemplate.postForEntity(
                 url,
                 item,
                 ShoppingList.class);
-    }
-
-
-    // Assertion Helpers
-
-    private static void emptyListAssertions(ShoppingList actual) {
-        assertThat(actual.getId().length()).isEqualTo(36);
-        assertThat(actual.getName()).isEqualTo("name");
-        assertThat(actual.getItems().size()).isEqualTo(0);
     }
 
 
@@ -62,7 +53,7 @@ public class ShoppingListScenarioTests {
     void postToCreateNewList() {
         ShoppingList created = createEmptyShoppingList().getBody();
 
-        emptyListAssertions(created);
+        emptyShoppingListAssertions(created);
     }
 
 
@@ -71,7 +62,7 @@ public class ShoppingListScenarioTests {
         ShoppingList created = createEmptyShoppingList().getBody();
         ShoppingList fetched = getShoppingListById(created.getId()).getBody();
 
-        emptyListAssertions(fetched);
+        emptyShoppingListAssertions(fetched);
     }
 
     @Test

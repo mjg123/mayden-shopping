@@ -5,16 +5,10 @@ import lol.gilliard.mayden.domain.ShoppingItem;
 import lol.gilliard.mayden.domain.ShoppingList;
 import org.junit.jupiter.api.Test;
 
+import static lol.gilliard.mayden.TestHelpers.emptyShoppingListAssertions;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class ShoppingListServiceTest {
-
-    private void emptyShoppingListAssertions(ShoppingList emptyList) {
-        assertThat(emptyList).isNotNull();
-        assertThat(emptyList.getId().length()).isEqualTo(36);  // UUID is 36 characters
-        assertThat(emptyList.getName()).isEqualTo("name");
-        assertThat(emptyList.getItems().size()).isEqualTo(0);
-    }
 
     @Test
     public void createEmptyShoppingList() {
