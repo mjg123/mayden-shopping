@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted
+Accepted v2
 
 ## Context
 
@@ -26,7 +26,7 @@ Because:
 
 ### Backend stack
   - Spring Boot (Java) app
-    - Components: Spring Web, Spring Security, Spring data JPA
+    - Components: Spring Web
 
 Because:
   - Developer familiarity
