@@ -10,5 +10,6 @@ export const pageLocators = {
     newItemField: '#new-item-text',
     addNewItemButton: '#add-new-item',
     shoppingListItem: '.listItemName',
-    removeItemButton: '.removeItemButton'
+    removeItemButton: '.removeItemButton',
+    toggleItemCheckbox: '.listItemToggle'
 };

@@ -33,6 +33,24 @@ const apiPOST = (path) => async (cb, body) => {
   }
 }
 
+const apiPUT = (path) => async (cb, body) => {
+  try {
+    const resp = await fetch(path,
+      {
+        "method": "PUT",
+        "body": JSON.stringify(body),
+        "headers": { "content-type": "application/json" }
+      });
+    if (!resp.ok) {
+      throw new Error(`Response status: ${resp.status}`);
+    }
+    const json = await resp.json();
+    cb(json);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
 const apiDELETE = (path) => async () => {
   try {
     const resp = await fetch(path,
@@ -81,12 +99,19 @@ const removeItemFromList = (cb, listId, itemIndex) => {
     .then(apiGET("/api/list")(cb, listId));
 }
 
+const toggleItemStruckOut = (cb, listId, itemIndex, item) => {
+  const newItem = {...item};
+  newItem.struckOut = !item.struckOut;
+  apiPUT("/api/list/" + listId + "/item/" + itemIndex)(cb, newItem)
+}
+
 const ShoppingListAPI = {
   randomItemName: randomItemName,
   fetchList: apiGET("/api/list"),
   createNewShoppingList: apiPOST("/api/list"),
   addItemToList: addItemToList,
-  removeItemFromList: removeItemFromList
+  removeItemFromList: removeItemFromList,
+  toggleItemStruckOut: toggleItemStruckOut
 }
 
 export { ShoppingListAPI };

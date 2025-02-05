@@ -47,4 +47,10 @@ public class ShoppingListController {
         return throw404ifNull(shoppingList);
     }
 
+    @PutMapping("/api/list/{id}/item/{index}")
+    public ShoppingList replaceItemInList(@PathVariable("id") String id, @PathVariable("index") Integer index, @RequestBody ShoppingItem item){
+        ShoppingList shoppingList = slService.replaceItemInList(id, item, index);
+        return throw404ifNull(shoppingList);
+    }
+
 }

@@ -47,19 +47,27 @@ public class ShoppingListScenarioTests {
         // nor does it give you the ResponseEntity to assert on status codes etc
     }
 
+    private void toggleStruckOut(String id, int index){
+        ShoppingItem item = getShoppingListById(id).getBody().getItems().get(index);
+        item.setStruckOut(!item.isStruckOut());
+
+        String url = "http://localhost:" + port + "/api/list/" + id + "/item/" + index;
+
+        this.restTemplate.put(url, item);
+    }
 
 
     // Tests
 
     @Test
-    void nonExistentListGenerates404() {
+    public void nonExistentListGenerates404() {
         ResponseEntity<ShoppingList> response = getShoppingListById("non-existent");
 
         assertThat(response.getStatusCode().value()).isEqualTo(404);
     }
 
     @Test
-    void postToCreateNewList() {
+    public void postToCreateNewList() {
         ShoppingList created = createEmptyShoppingList().getBody();
 
         emptyShoppingListAssertions(created);
@@ -67,7 +75,7 @@ public class ShoppingListScenarioTests {
 
 
     @Test
-    void fetchNewlyCreatedList() {
+    public void fetchNewlyCreatedList() {
         ShoppingList created = createEmptyShoppingList().getBody();
         ShoppingList fetched = getShoppingListById(created.getId()).getBody();
 
@@ -75,7 +83,7 @@ public class ShoppingListScenarioTests {
     }
 
     @Test
-    void addItemToList() {
+    public void addItemToList() {
         ShoppingList created = createEmptyShoppingList().getBody();
 
         ShoppingItem milk = new ShoppingItem("Milk");
@@ -92,7 +100,7 @@ public class ShoppingListScenarioTests {
     }
 
     @Test
-    void addItemToNonExistentListGenerates404() {
+    public void addItemToNonExistentListGenerates404() {
         ShoppingItem milk = new ShoppingItem("Milk");
         ResponseEntity<ShoppingList> errorResponse = addItemToList("non-existent", milk);
 
@@ -100,7 +108,7 @@ public class ShoppingListScenarioTests {
     }
 
     @Test
-    void removeItemFromList(){
+    public void removeItemFromList(){
         ShoppingList created = createEmptyShoppingList().getBody();
 
         addItemToList(created.getId(), new ShoppingItem("Milk")).getBody();
@@ -120,7 +128,7 @@ public class ShoppingListScenarioTests {
     }
 
     @Test
-    void removeItemNoSuchItem(){
+    public void removeItemNoSuchItem(){
         ShoppingList created = createEmptyShoppingList().getBody();
 
         addItemToList(created.getId(), new ShoppingItem("Milk")).getBody();
@@ -130,14 +138,12 @@ public class ShoppingListScenarioTests {
         removeItemFromList(created.getId(), 6); // no 6th element
         ShoppingList fetchedShoppingList = getShoppingListById(created.getId()).getBody();
 
-        // POST (add item) response
         assertThat(fetchedShoppingList.getItems().size()).isEqualTo(3);
     }
 
     @Test
-    void removeItemNonIntegerItem(){
+    public void removeItemNonIntegerItem(){
         ShoppingList created = createEmptyShoppingList().getBody();
-
         addItemToList(created.getId(), new ShoppingItem("Milk")).getBody();
         addItemToList(created.getId(), new ShoppingItem("Eggs")).getBody();
         addItemToList(created.getId(), new ShoppingItem("Spam")).getBody();
@@ -145,9 +151,24 @@ public class ShoppingListScenarioTests {
         removeItemFromList(created.getId(), "this_is_not_a_number"); // no 6th element
         ShoppingList fetchedShoppingList = getShoppingListById(created.getId()).getBody();
 
-        // POST (add item) response
         assertThat(fetchedShoppingList.getItems().size()).isEqualTo(3);
     }
 
+    @Test
+    public void setItemStruckOut(){
+        ShoppingList created = createEmptyShoppingList().getBody();
+        addItemToList(created.getId(), new ShoppingItem("Milk")).getBody();
+        addItemToList(created.getId(), new ShoppingItem("Eggs")).getBody();
+
+        // default to non-struckout
+        ShoppingList fetchedShoppingList1 = getShoppingListById(created.getId()).getBody();
+        assertThat(fetchedShoppingList1.getItems().get(1).isStruckOut()).isFalse();
+
+        toggleStruckOut(created.getId(), 1);
+        ShoppingList fetchedShoppingList2 = getShoppingListById(created.getId()).getBody();
+
+        // is now struck out
+        assertThat(fetchedShoppingList2.getItems().get(1).isStruckOut()).isTrue();
+    }
 
 }

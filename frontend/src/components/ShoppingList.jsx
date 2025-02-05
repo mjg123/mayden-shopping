@@ -62,12 +62,17 @@ function DisplayShoppingList({ shoppingList, setShoppingList }) {
 function ShoppingListItem({ item, shoppingList, setShoppingList, itemIndex }) {
     return (
         <li className="listItem">
-            <div className="listItemName">{item.name}</div>
+            <div className="listItemStrike">
+                <input type="checkbox" className="listItemToggle" checked={item.struckOut} readOnly={true}
+                onClick={() =>{
+                    ShoppingListAPI.toggleItemStruckOut(setShoppingList, shoppingList.id, itemIndex, item)
+                }}
+                />
+            </div>
+            <div className={"listItemName" + (item.struckOut ? ' struckOut' : '')}>{item.name}</div>
             <div className="listItemRemove">
                 <button className="input removeItemButton" onClick={() => {
-                    ShoppingListAPI.removeItemFromList((newList) => {
-                        setShoppingList(newList);
-                    }, shoppingList.id, itemIndex);
+                    ShoppingListAPI.removeItemFromList(setShoppingList, shoppingList.id, itemIndex);
                 }}>🗑️ remove</button>
             </div>
         </li>)

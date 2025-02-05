@@ -18,14 +18,14 @@ public class ShoppingListServiceTest {
     }
 
     @Test
-    public void fetchNonExistentShoppingList(){
+    public void fetchNonExistentShoppingList() {
         ShoppingList nonExistentList = new ShoppingListService().getById("DOES NOT EXIST");
 
         assertThat(nonExistentList).isNull();
     }
 
     @Test
-    public void createAndFetchShoppingList(){
+    public void createAndFetchShoppingList() {
         ShoppingListService shoppingListService = new ShoppingListService();
 
         ShoppingList created = shoppingListService.createEmptyList();
@@ -35,7 +35,7 @@ public class ShoppingListServiceTest {
     }
 
     @Test
-    public void addItemToList(){
+    public void addItemToList() {
         ShoppingListService shoppingListService = new ShoppingListService();
 
         ShoppingList created = shoppingListService.createEmptyList();
@@ -52,7 +52,7 @@ public class ShoppingListServiceTest {
     }
 
     @Test
-    public void removeItemFromList(){
+    public void removeItemFromList() {
         ShoppingListService shoppingListService = new ShoppingListService();
 
         ShoppingList theList = shoppingListService.createEmptyList();
@@ -79,7 +79,7 @@ public class ShoppingListServiceTest {
     }
 
     @Test
-    public void removeInvalidItemsFromList(){
+    public void removeInvalidItemsFromList() {
         ShoppingListService shoppingListService = new ShoppingListService();
 
         ShoppingList theList = shoppingListService.createEmptyList();
@@ -109,6 +109,30 @@ public class ShoppingListServiceTest {
         assertThat(theList.getItems().get(0).getName()).isEqualTo("Bananas");
         assertThat(theList.getItems().get(1).getName()).isEqualTo("Chocolate");
         assertThat(theList.getItems().get(2).getName()).isEqualTo("Gloves");
+    }
+
+    @Test
+    public void replaceListItem() {
+        // used eg to set isStruckOut on items
+        ShoppingListService shoppingListService = new ShoppingListService();
+
+        ShoppingList theList = shoppingListService.createEmptyList();
+        shoppingListService.addItemToList(theList.getId(), new ShoppingItem("Bananas"));
+        shoppingListService.addItemToList(theList.getId(), new ShoppingItem("Chocolate"));
+
+        assertThat(theList.getItems().get(1).isStruckOut()).isFalse();
+
+        // Replace item 1 with a struck out version
+        ShoppingItem struckOutItem = new ShoppingItem("Chocolate");
+        struckOutItem.setStruckOut(true);
+        shoppingListService.replaceItemInList(theList.getId(), struckOutItem, 1);
+
+
+        assertThat(theList.getItems().size()).isEqualTo(2);
+        assertThat(theList.getItems().get(0).getName()).isEqualTo("Bananas");
+        assertThat(theList.getItems().get(1).getName()).isEqualTo("Chocolate");
+
+        assertThat(theList.getItems().get(1).isStruckOut()).isTrue();
     }
 
 }

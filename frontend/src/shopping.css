@@ -82,8 +82,8 @@ footer {
 .listItem {
     padding: 4px;
     display: grid;
-    grid-template-columns: 1fr 5fr 2fr;
-    border-bottom: 1px dashed #888;
+    grid-template-columns: 1fr 11fr 4fr;
+    border-bottom: 1px dashed #008080FF;
 }
 
 .listItemName {
@@ -103,4 +103,13 @@ footer {
     border-radius: 5px;
     padding: 8px;
     background-color: #00808020;
+}
+
+.struckOut {
+    text-decoration: line-through;
+    color: #0008;
+}
+
+.listItemStrike {
+    margin: auto 0;
 }

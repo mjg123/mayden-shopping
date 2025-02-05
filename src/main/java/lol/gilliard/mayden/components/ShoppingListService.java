@@ -15,7 +15,7 @@ public class ShoppingListService {
 
     private final Map<String, ShoppingList> storedLists = new HashMap<>();
 
-    private String generateShoppingListName(){
+    private String generateShoppingListName() {
         String dayOfWeekAllCaps = LocalDate.now().getDayOfWeek().toString();
         String dayOfWeek = dayOfWeekAllCaps.charAt(0) + dayOfWeekAllCaps.substring(1).toLowerCase();
         return dayOfWeek + "'s Shopping List";
@@ -40,18 +40,31 @@ public class ShoppingListService {
                 });
     }
 
-    public ShoppingList removeItem(String id, int n) {
+    public ShoppingList removeItem(String id, int index) {
 
         try {
             return storedLists.computeIfPresent(id,
                     (k, list) -> {
-                        list.getItems().remove(n);
+                        list.getItems().remove(index);
                         return list;
                     });
 
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             return null;
         }
 
+    }
+
+    public ShoppingList replaceItemInList(String id, ShoppingItem item, Integer index) {
+        try {
+            return storedLists.computeIfPresent(id,
+                    (k, list) -> {
+                        list.getItems().set(index, item);
+                        return list;
+                    });
+
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
     }
 }
