@@ -30,11 +30,6 @@ But:
 
 ## Decision
 
- - We will use `mailto` links for this story
-   - this is quick and easy, and will let users share their lists
-   - `mailto` links can specify subject and body text
- - We can discuss more if this is not sufficient
-
 **Updated for v2:**
  - I find that support for `mailto` links is really inconsistent between different platforms and clients.
    - The subject may be truncated
@@ -45,4 +40,4 @@ Decision: This story needs more discussion, will most likely benefit from using 
 
 ## Consequences
 
-"Email to someone" functionality will rely on the user having a default mail app set up and working.
+Story 9 will not be completed for the demo.
