@@ -1,57 +1,33 @@
 # Mayden Technical Assessment
 Matthew Gilliard, Feb 2025
 
+Hello, thank you for reading this submission.
 
+I was given a list of [ten stories](./notes/00-all-stories.md), of which:
 
-# Building, Development and Testing 
+ - Stories 1,2,3,4,5 are ready for review.
+ - Story 6 would take too long for the guide of 6 hours, but I have drafted [an implementation plan](ADR/05-sharing-by-email.md).
+ - Stories 7 and 8 need more discussion about where to source pricing information ([more info](ADR/02-grocery-prices.md)).
+ - Story 9 needs the ability to send email, which is nontrivial ([more info](ADR/05-sharing-by-email.md))
+ - Story 10 needs refinement ([more info](ADR/04-users-and-security.md))
 
-## Prerequisites
-Built with:
- - Node v23.2.0
- - pnpm 9.15.4
- - Java 23
+I think this is reasonable for the time spent.
 
-## Build for release
+As well as the info linked above, I documented:
+ - [The project architecture](ADR/01-project-architecture.md)
+ - [Decisions around database usage](ADR/03-database-usage.md)
+ - [Testing strategies](ADR/06-testing-strategies.md)
 
-To build the full app:
- - Build the frontend
-   - `cd frontend`
-   - `pnpm run build`
-   - `cd ..`
- - Add the built frontend code to the backend
-   - `cp -R frontend/dist/* src/main/resources/static`
- - Build the combined app
-   - `./mvnw clean package`
+## Reading and running the code
 
-The full app is now packaged into `target/mayden-shopping-0.0.1-SNAPSHOT.jar` which can be run with `java -jar <path_to_jar>`.
-The app will be served at `http://localhost:8080`.
+_Note: Full dev documentation is in [DEVELOPMENT.md](./DEVELOPMENT.md)_
 
-Note that the built frontend code is .gitignore'd so you will always need to `pnpm run build` on a fresh clone.
+ - Backend source code (Java, Spring Boot) is in `/src`
+ - Frontend source code (Javascript, React) is in `/frontend`
 
-## Development
+The easiest way to run the code is to download the pre-built `mayden-shopping-0.0.1-SNAPSHOT.jar` from [the releases page](https://github.com/mjg123/mayden-shopping/releases/tag/0.0.1-SNAPSHOT) of this repo.
 
-Frontend and backend may be worked on independently.
+Run this code with `java -jar mayden-shopping-0.0.1-SNAPSHOT.jar`, then open `http://localhost:8080` in your browser.
+Java 23 is expected. If needed you can download it from the [Eclipse releases page](https://adoptium.net/en-GB/temurin/releases/?version=23).
 
-The backend has no dependency on the frontend.
-For backend work a Java IDE is very useful (recommended: IntelliJ IDEA).
-
-For frontend dev you will need the backend running _somewhere_, but it can be a separate instance
-(served on a different host/port, codebase in a different directory, etc). Start either a full build
-of the app or backend only, then make sure to update `frontend/vite.config.js` so that your
-WIP frontend code will be proxied to the running backend. Note that this file might need
-a fixed hostname or IP address so will very likely need editing. If you see `http proxy error`
-in the frontend console logs this is probably the cause.
-
-Run a hot-reloading dev instance of the frontend code with `pnpm run dev` in the `frontend`
-directory.
-
-## Testing
-
-`./mvnw test` will run all unit and integration tests for the backend
-
-`cd frontend; pnpm exec playwright test` will run all the E2E tests.
-
-Notes:
- - App must be running with frontend able to reach backend, or tests will fail
- - set the base URL to test against in `frontend/e2e/util/locators.js`
-
+Please note that I am not a graphic designer, this is ugly but functional.

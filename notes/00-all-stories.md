@@ -82,7 +82,7 @@ Key:
        Display the total cost for the whole shop
 ```
 
-9. I want to share my shopping list via email ⏳
+9. I want to share my shopping list via email 🤔
 ```
    As a ... shopper
    I want to ... I want to send my shopping list to my partner
