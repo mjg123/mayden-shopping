@@ -6,7 +6,7 @@ import { pageLocators } from './util/locators.js';
 test('add multiple items to a shopping list', async ({ page }) => {
   await page.goto(pageLocators.baseUrl);
 
-  await page.locator(pageLocators.newListButton).click({force: true});
+  await page.locator(pageLocators.newListButton).click();
 
   await page.waitForURL(new RegExp(pageLocators.urlWithUUID));
 

@@ -6,7 +6,7 @@ const apiGET = (path) => async (cb, id) => {
         cb(null);
         return;
       }
-      throw new Error(`Response status: ${response.status}`);
+      throw new Error(`Response status: ${resp.status}`);
     }
     const json = await resp.json();
     cb(json);
@@ -17,15 +17,29 @@ const apiGET = (path) => async (cb, id) => {
 
 const apiPOST = (path) => async (cb, body) => {
   try {
-    const resp = await fetch(path, 
-      { "method": "POST",
+    const resp = await fetch(path,
+      {
+        "method": "POST",
         "body": JSON.stringify(body),
-        "headers": {"content-type": "application/json"} });
+        "headers": { "content-type": "application/json" }
+      });
     if (!resp.ok) {
-      throw new Error(`Response status: ${response.status}`);
+      throw new Error(`Response status: ${resp.status}`);
     }
     const json = await resp.json();
     cb(json);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+const apiDELETE = (path) => async () => {
+  try {
+    const resp = await fetch(path,
+      { "method": "DELETE" });
+    if (!resp.ok) {
+      throw new Error(`Response status: ${resp.status}`);
+    }
   } catch (error) {
     console.error(error.message);
   }
@@ -54,19 +68,25 @@ const randomItemName = () => {
     "A giant jar of pickles",
     "Confetti for the surprise party",
     "A single lemon, for dramatic effect"];
-    
+
   return items[Math.floor(Math.random() * items.length)];
 }
 
 const addItemToList = (cb, listId, itemName) => {
-  apiPOST("api/list/" + listId + "/item")(cb, {name: itemName})
+  apiPOST("/api/list/" + listId + "/item")(cb, { name: itemName })
+}
+
+const removeItemFromList = (cb, listId, itemIndex) => {
+  apiDELETE("/api/list/" + listId + "/item/" + itemIndex)()
+    .then(apiGET("/api/list")(cb, listId));
 }
 
 const ShoppingListAPI = {
   randomItemName: randomItemName,
-  fetchList: apiGET("api/list"),
-  createNewShoppingList: apiPOST("api/list"),
-  addItemToList: addItemToList
+  fetchList: apiGET("/api/list"),
+  createNewShoppingList: apiPOST("/api/list"),
+  addItemToList: addItemToList,
+  removeItemFromList: removeItemFromList
 }
 
 export { ShoppingListAPI };

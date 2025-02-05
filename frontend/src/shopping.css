@@ -55,7 +55,6 @@ footer {
 }
 
 #listContainer {
-    max-width: 800px;
     display: grid;
     grid-template-columns: 3fr 1fr;
 }
@@ -82,11 +81,26 @@ footer {
 
 .listItem {
     padding: 4px;
+    display: grid;
+    grid-template-columns: 1fr 5fr 2fr;
+    border-bottom: 1px dashed #888;
 }
 
-.listItem:after {
-    content:"";
-    display: block;
-    margin-top: 4px;
-    border-bottom: 1px dashed #888;
+.listItemName {
+    margin: auto 0;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.listItemRemove {
+    grid-column-start: 3;
+    grid-column-end: 4;
+}
+
+#shoppingList {
+    max-width: 800px;
+    border: 2px solid teal;
+    border-radius: 5px;
+    padding: 8px;
+    background-color: #00808020;
 }

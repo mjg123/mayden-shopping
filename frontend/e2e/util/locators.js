@@ -9,5 +9,6 @@ export const pageLocators = {
     shoppingListSize: '#shopping-list-size',
     newItemField: '#new-item-text',
     addNewItemButton: '#add-new-item',
-    shoppingListItem: '.listItem'
+    shoppingListItem: '.listItemName',
+    removeItemButton: '.removeItemButton'
 };

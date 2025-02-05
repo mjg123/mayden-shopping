@@ -23,15 +23,11 @@ export function ShoppingList({ shoppingList, setShoppingList }) {
             {isLoading ? <span>...</span> :
 
                 (shoppingList ?
-
                     <DisplayShoppingList shoppingList={shoppingList} setShoppingList={setShoppingList} />
-
                     :
-
                     <span>
                         This shopping list no longer exists
                     </span>
-
                 )
             }
 
@@ -40,7 +36,11 @@ export function ShoppingList({ shoppingList, setShoppingList }) {
 
 function DisplayShoppingList({ shoppingList, setShoppingList }) {
 
-    const itemComponents = shoppingList.items.map((item, idx) => <ShoppingListItem key={"item-"+idx} item={item} />)
+    const itemComponents = shoppingList.items.map((item, idx) =>
+        <ShoppingListItem key={"item-" + idx}
+            item={item} itemIndex={idx}
+            shoppingList={shoppingList} setShoppingList={setShoppingList} />
+    )
 
     return (<>
         <span className="debug">
@@ -59,8 +59,18 @@ function DisplayShoppingList({ shoppingList, setShoppingList }) {
     </>);
 }
 
-function ShoppingListItem({ item }) {
-    return <li className="listItem">{item.name}</li>
+function ShoppingListItem({ item, shoppingList, setShoppingList, itemIndex }) {
+    return (
+        <li className="listItem">
+            <div className="listItemName">{item.name}</div>
+            <div className="listItemRemove">
+                <button className="input removeItemButton" onClick={() => {
+                    ShoppingListAPI.removeItemFromList((newList) => {
+                        setShoppingList(newList);
+                    }, shoppingList.id, itemIndex);
+                }}>🗑️ remove</button>
+            </div>
+        </li>)
 }
 
 function AddItem({ shoppingList, setShoppingList }) {
