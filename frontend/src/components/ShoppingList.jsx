@@ -43,9 +43,6 @@ function DisplayShoppingList({ shoppingList, setShoppingList }) {
     )
 
     return (<>
-        <span className="debug">
-            {JSON.stringify(shoppingList)}
-        </span>
         <div>
             <h2>🛒 {shoppingList.name}</h2>
             <div id="shopping-list-size" className="info">

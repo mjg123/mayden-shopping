@@ -21,13 +21,6 @@ footer {
     font-size: small;
 }
 
-.debug {
-    border: 2px solid red;
-    background-color: #F002;
-    padding: 4px;
-    display:none;
-}
-
 .info {
     color: #0008;
 }
