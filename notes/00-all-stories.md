@@ -7,7 +7,7 @@ Key:
  - 👩‍💻 Frontend done
  - 🤔 Needs discussion (out of scope for demo)
 
-1. View a list of items on a shopping list 🛠️🖥️
+1. View a list of items on a shopping list 🖥️👩‍💻
 ```
     As a ... Shopper
     I want to ... View items on my shopping list
@@ -16,7 +16,7 @@ Key:
         Create a shopping list that can contain a list of groceries
 ```
 
-2. Add items to the shopping list 🛠️🖥️
+2. Add items to the shopping list 🖥️👩‍💻
 ```
     As a ... Shopper
     I want to ... be able to add items to my shopping list
@@ -26,7 +26,7 @@ Key:
 ```
 
 
-3. Remove stuff from the shopping list ⏳
+3. Remove stuff from the shopping list 🛠️
 ```
    As a ... shopper
    I want to ... be able to remove items from my shopping list
@@ -44,7 +44,7 @@ Key:
         Create a way for users to know what they have and haven’t already picked up
 ```
 
-5. Persist the data so I can view the list if I move away from the page 🛠️🖥️
+5. Persist the data so I can view the list if I move away from the page 🖥️👩‍💻
 ```
    As a ... shopper
    I want to ... be able to still see the state of my shopping list when I come back to it

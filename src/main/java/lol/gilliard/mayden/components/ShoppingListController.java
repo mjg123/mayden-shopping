@@ -40,4 +40,11 @@ public class ShoppingListController {
         ShoppingList shoppingList = slService.addItemToList(id, item);
         return throw404ifNull(shoppingList);
     }
+
+    @DeleteMapping("/api/list/{id}/item/{n}")
+    public ShoppingList deleteItemFromList(@PathVariable String id, @PathVariable Integer n){
+        ShoppingList shoppingList = slService.removeItem(id, n);
+        return throw404ifNull(shoppingList);
+    }
+
 }

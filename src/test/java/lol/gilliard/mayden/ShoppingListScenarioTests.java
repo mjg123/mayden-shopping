@@ -39,6 +39,15 @@ public class ShoppingListScenarioTests {
                 ShoppingList.class);
     }
 
+    private void removeItemFromList(String id, Object n) {
+        String url = "http://localhost:" + port + "/api/list/" + id + "/item/" + n;
+        this.restTemplate.delete(url);
+
+        // note: restTemplate doesn't allow for response bodies to DELETE requests
+        // nor does it give you the ResponseEntity to assert on status codes etc
+    }
+
+
 
     // Tests
 
@@ -89,5 +98,56 @@ public class ShoppingListScenarioTests {
 
         assertThat(errorResponse.getStatusCode().value()).isEqualTo(404);
     }
+
+    @Test
+    void removeItemFromList(){
+        ShoppingList created = createEmptyShoppingList().getBody();
+
+        addItemToList(created.getId(), new ShoppingItem("Milk")).getBody();
+        addItemToList(created.getId(), new ShoppingItem("Eggs")).getBody();
+        addItemToList(created.getId(), new ShoppingItem("Spam")).getBody();
+
+        removeItemFromList(created.getId(), 1);
+
+        ResponseEntity<ShoppingList> fetchedEntity = getShoppingListById(created.getId());
+        assertThat(fetchedEntity.getStatusCode().value()).isEqualTo(200);
+        ShoppingList fetchedShoppingList = fetchedEntity.getBody();
+
+        // POST (add item) response
+        assertThat(fetchedShoppingList.getItems().size()).isEqualTo(2);
+        assertThat(fetchedShoppingList.getItems().get(0).getName()).isEqualTo("Milk");
+        assertThat(fetchedShoppingList.getItems().get(1).getName()).isEqualTo("Spam");
+    }
+
+    @Test
+    void removeItemNoSuchItem(){
+        ShoppingList created = createEmptyShoppingList().getBody();
+
+        addItemToList(created.getId(), new ShoppingItem("Milk")).getBody();
+        addItemToList(created.getId(), new ShoppingItem("Eggs")).getBody();
+        addItemToList(created.getId(), new ShoppingItem("Spam")).getBody();
+
+        removeItemFromList(created.getId(), 6); // no 6th element
+        ShoppingList fetchedShoppingList = getShoppingListById(created.getId()).getBody();
+
+        // POST (add item) response
+        assertThat(fetchedShoppingList.getItems().size()).isEqualTo(3);
+    }
+
+    @Test
+    void removeItemNonIntegerItem(){
+        ShoppingList created = createEmptyShoppingList().getBody();
+
+        addItemToList(created.getId(), new ShoppingItem("Milk")).getBody();
+        addItemToList(created.getId(), new ShoppingItem("Eggs")).getBody();
+        addItemToList(created.getId(), new ShoppingItem("Spam")).getBody();
+
+        removeItemFromList(created.getId(), "this_is_not_a_number"); // no 6th element
+        ShoppingList fetchedShoppingList = getShoppingListById(created.getId()).getBody();
+
+        // POST (add item) response
+        assertThat(fetchedShoppingList.getItems().size()).isEqualTo(3);
+    }
+
 
 }

@@ -39,4 +39,19 @@ public class ShoppingListService {
                     return list;
                 });
     }
+
+    public ShoppingList removeItem(String id, int n) {
+
+        try {
+            return storedLists.computeIfPresent(id,
+                    (k, list) -> {
+                        list.getItems().remove(n);
+                        return list;
+                    });
+
+        } catch (IndexOutOfBoundsException e){
+            return null;
+        }
+
+    }
 }

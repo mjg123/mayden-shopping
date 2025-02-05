@@ -51,4 +51,64 @@ public class ShoppingListServiceTest {
         assertThat(refetchedBananas.getItems().getFirst().getName()).isEqualTo("Bananas");
     }
 
+    @Test
+    public void removeItemFromList(){
+        ShoppingListService shoppingListService = new ShoppingListService();
+
+        ShoppingList theList = shoppingListService.createEmptyList();
+        shoppingListService.addItemToList(theList.getId(), new ShoppingItem("Bananas"));
+        shoppingListService.addItemToList(theList.getId(), new ShoppingItem("Chocolate"));
+        shoppingListService.addItemToList(theList.getId(), new ShoppingItem("Gloves"));
+
+        assertThat(theList.getItems().size()).isEqualTo(3);
+
+        // take chocolate off the list
+        theList = shoppingListService.removeItem(theList.getId(), 1);
+        assertThat(theList.getItems().size()).isEqualTo(2);
+        assertThat(theList.getItems().get(0).getName()).isEqualTo("Bananas");
+        assertThat(theList.getItems().get(1).getName()).isEqualTo("Gloves");
+
+        // take bananas off the list
+        theList = shoppingListService.removeItem(theList.getId(), 0);
+        assertThat(theList.getItems().size()).isEqualTo(1);
+        assertThat(theList.getItems().get(0).getName()).isEqualTo("Gloves");
+
+        // finally, the gloves come off 🥁
+        theList = shoppingListService.removeItem(theList.getId(), 0);
+        assertThat(theList.getItems().size()).isEqualTo(0);
+    }
+
+    @Test
+    public void removeInvalidItemsFromList(){
+        ShoppingListService shoppingListService = new ShoppingListService();
+
+        ShoppingList theList = shoppingListService.createEmptyList();
+        shoppingListService.addItemToList(theList.getId(), new ShoppingItem("Bananas"));
+        shoppingListService.addItemToList(theList.getId(), new ShoppingItem("Chocolate"));
+        shoppingListService.addItemToList(theList.getId(), new ShoppingItem("Gloves"));
+
+        assertThat(theList.getItems().size()).isEqualTo(3);
+
+        // take the 4th item off a 3-item list
+        ShoppingList theNewList = shoppingListService.removeItem(theList.getId(), 4);
+
+        assertThat(theNewList).isNull();
+
+        assertThat(theList.getItems().size()).isEqualTo(3);
+        assertThat(theList.getItems().get(0).getName()).isEqualTo("Bananas");
+        assertThat(theList.getItems().get(1).getName()).isEqualTo("Chocolate");
+        assertThat(theList.getItems().get(2).getName()).isEqualTo("Gloves");
+
+
+        // take the -1th item off a 3-item list
+        theNewList = shoppingListService.removeItem(theList.getId(), -1);
+
+        assertThat(theNewList).isNull();
+
+        assertThat(theList.getItems().size()).isEqualTo(3);
+        assertThat(theList.getItems().get(0).getName()).isEqualTo("Bananas");
+        assertThat(theList.getItems().get(1).getName()).isEqualTo("Chocolate");
+        assertThat(theList.getItems().get(2).getName()).isEqualTo("Gloves");
+    }
+
 }
