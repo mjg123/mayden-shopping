@@ -1,6 +1,6 @@
 # Story 3
 
-5. Remove stuff from the shopping list ⏳
+3. Remove stuff from the shopping list ⏳
 ```
    As a ... shopper
    I want to ... be able to remove items from my shopping list

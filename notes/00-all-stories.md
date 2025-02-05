@@ -26,7 +26,7 @@ Key:
 ```
 
 
-3. Remove stuff from the shopping list 🛠️
+3. Remove stuff from the shopping list 🖥️👩‍💻
 ```
    As a ... shopper
    I want to ... be able to remove items from my shopping list
@@ -35,7 +35,7 @@ Key:
        Create a way for user to remove an item to the shopping list
 ```
 
-4. When I’ve bought something from my list I want to be able to cross it off the list ⏳
+4. When I’ve bought something from my list I want to be able to cross it off the list 🖥️👩‍💻
 ```
    As a ... shopper
    I want to ... have a way of marking off when I’ve picked up an item
