@@ -1,0 +1,92 @@
+body {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#root {
+    width: 100%;
+}
+
+main {
+    margin-top: 32px;
+    margin-bottom: 32px;
+    min-height: 240px;
+}
+
+nav > ul {
+    list-style-type: none;
+    display: inline-block;
+}
+
+footer {
+    color: #888;
+    font-size: small;
+}
+
+.debug {
+    border: 2px solid red;
+    background-color: #F002;
+    padding: 4px;
+    display:none;
+}
+
+.info {
+    color: #0008;
+}
+
+.input {
+    border-radius: 8px;
+    border: 1px solid #646cff44;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    margin-right: 4px;
+}
+
+.input:hover:enabled {
+    border-color: #646cff;
+}
+
+.input:focus,
+.input:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+}
+
+#listContainer {
+    max-width: 800px;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+.cols-both {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.cols-left {
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.cols-right {
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.shoppingList {
+    list-style-type: none;
+    padding: 4px;
+}
+
+.listItem {
+    padding: 4px;
+}
+
+.listItem:after {
+    content:"";
+    display: block;
+    margin-top: 4px;
+    border-bottom: 1px dashed #888;
+}

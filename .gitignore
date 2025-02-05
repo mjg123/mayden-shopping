@@ -56,3 +56,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+# Don't check in compiled javascript
+/src/main/resources/static/*
