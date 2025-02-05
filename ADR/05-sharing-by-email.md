@@ -2,7 +2,7 @@
 
 ## Status
 
-accepted
+accepted v2
 
 ## Context
 
@@ -34,6 +34,14 @@ But:
    - this is quick and easy, and will let users share their lists
    - `mailto` links can specify subject and body text
  - We can discuss more if this is not sufficient
+
+**Updated for v2:**
+ - I find that support for `mailto` links is really inconsistent between different platforms and clients.
+   - The subject may be truncated
+   - The body may be malformed, or missing entirely
+   - If the email client is not configured properly it will not be able to handle the link at all
+
+Decision: This story needs more discussion, will most likely benefit from using a 3rd party mail service.
 
 ## Consequences
 
